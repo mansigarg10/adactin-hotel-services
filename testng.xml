@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Adactin Hotel Booing Services" parallel="tests" thread-count="2" >
+
+    <listeners>
+        <listener class-name="com.mansi.adactin.listeners.Listeners"/>
+    </listeners>
+
+    <test verbose="2" name="Login">
+        <classes>
+            <class name="com.mansi.adactin.tests.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="RoomBooking">
+        <classes>
+            <class name="com.mansi.adactin.tests.RoomBookingTest"/>
+        </classes>
+    </test>
+
+    <test name="RegisterIntoApplication">
+        <classes>
+            <class name="com.mansi.adactin.tests.RegisterTest"/>
+        </classes>
+    </test>
+
+    <test name="ChangePassword">
+        <classes>
+            <class name="com.mansi.adactin.tests.ChangePasswordTest"/>
+        </classes>
+    </test>
+
+    <test name="ForgotPassword">
+        <classes>
+            <class name="com.mansi.adactin.tests.ForgetPasswordTest"/>
+        </classes>
+    </test>
+
+    <test name="CancelBooking">
+        <classes>
+            <class name="com.mansi.adactin.tests.BookedItineraryTest"/>
+        </classes>
+    </test>
+
+</suite>

@@ -1,0 +1,14 @@
+[
+  {
+    "k_name": "Michella",
+    "k_surname": "Stone",
+    "k_currentAddress": "123 Elm Street, New York",
+    "k_cardNumber": "1234567891223467",
+    "k_cardBrand": "Visa",
+    "k_cardExpiryMonth": "December",
+    "k_cardExpiryYear": "2028",
+    "k_cardCVV": "123"
+
+
+  }
+]
