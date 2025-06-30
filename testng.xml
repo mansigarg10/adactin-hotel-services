@@ -1,46 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-
-<suite name="Adactin Hotel Booing Services" parallel="tests" thread-count="2" >
-
+<suite name="All Test Suite">
     <listeners>
         <listener class-name="com.mansi.adactin.listeners.Listeners"/>
     </listeners>
-
-    <test verbose="2" name="Login">
+    <test verbose="2" preserve-order="true" name="D:/Study/Java/Workspace/adactin-hotel-services">
         <classes>
-            <class name="com.mansi.adactin.tests.LoginTest"/>
+            <class name="com.mansi.adactin.tests.BookedItineraryTest">
+                <methods>
+                    <include name="cancelHotelBooking"/>
+                </methods>
+            </class>
+            <class name="com.mansi.adactin.tests.ChangePasswordTest">
+                <methods>
+                    <include name="changePassword"/>
+                </methods>
+            </class>
+            <class name="com.mansi.adactin.tests.ForgetPasswordTest">
+                <methods>
+                    <include name="forgotYourPassword"/>
+                </methods>
+            </class>
+            <class name="com.mansi.adactin.tests.LoginTest">
+                <methods>
+                    <include name="performLogin"/>
+                </methods>
+            </class>
+            <class name="com.mansi.adactin.tests.RegisterTest">
+                <methods>
+                    <include name="registerToApplication"/>
+                </methods>
+            </class>
+            <class name="com.mansi.adactin.tests.RoomBookingTest">
+                <methods>
+                    <include name="searchHotel"/>
+                </methods>
+            </class>
         </classes>
     </test>
-
-    <test name="RoomBooking">
-        <classes>
-            <class name="com.mansi.adactin.tests.RoomBookingTest"/>
-        </classes>
-    </test>
-
-    <test name="RegisterIntoApplication">
-        <classes>
-            <class name="com.mansi.adactin.tests.RegisterTest"/>
-        </classes>
-    </test>
-
-    <test name="ChangePassword">
-        <classes>
-            <class name="com.mansi.adactin.tests.ChangePasswordTest"/>
-        </classes>
-    </test>
-
-    <test name="ForgotPassword">
-        <classes>
-            <class name="com.mansi.adactin.tests.ForgetPasswordTest"/>
-        </classes>
-    </test>
-
-    <test name="CancelBooking">
-        <classes>
-            <class name="com.mansi.adactin.tests.BookedItineraryTest"/>
-        </classes>
-    </test>
-
 </suite>

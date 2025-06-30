@@ -81,7 +81,8 @@ public class BaseTest {
      */
     public static String captureScreenshot(WebDriver driver,String testName) throws IOException {
         File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        File destinationPath = new File(AdactinTestConstants.SCREENSHOT_PATH + testName + ".png");
+        File destinationPath = new File(System.getProperty("user.dir")
+                + "//test-output//Screenshots//" + testName + ".png");
         FileUtils.copyFile(src, destinationPath);
         return AdactinTestConstants.SCREENSHOT_PATH + testName + ".png";
     }

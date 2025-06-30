@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class ChangePasswordTest extends BaseTest {
 
-    @Test(priority = 5, enabled = false)
+    @Test(priority = 5)
     public void changePassword() throws IOException {
         driver = initializeBrowser();
         FileInputStream fileInputStream = new FileInputStream(propetyFile);

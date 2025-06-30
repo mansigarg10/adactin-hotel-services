@@ -5,6 +5,8 @@ import com.mansi.adactin.pages.EmailVerificationPage;
 import com.mansi.adactin.pages.RegisterPage;
 import com.mansi.adactin.utils.AdactinConstants;
 import com.mansi.adactin.utils.AdactinTestConstants;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -20,22 +22,31 @@ import java.util.List;
  */
 public class RegisterTest extends BaseTest {
 
+    private static final Logger LOG = LogManager.getLogger(RegisterTest.class);
+
     private RegisterPage registerPage;
     private EmailVerificationPage emailVerificationPage;
 
     private final String filePath = System.getProperty("user.dir") + AdactinConstants.REGISTER_JSON;
 
     @Test(dataProvider = "getData", priority = 1)
-    public void registerToApplication(HashMap<String, String > input) throws IOException, InterruptedException {
+    public void registerToApplication(HashMap<String, String > input) throws IOException {
         driver = initializeBrowser();
         registerPage = new RegisterPage(driver);
-        emailVerificationPage = registerPage.fillRegistrationForm(input.get("Username"),input.get("Password"),input.get("FullName"),input.get("EmailAddress"));
-        String verificationMsg = emailVerificationPage.getConfirmationMessage().getText();
-        if (verificationMsg.contains(AdactinTestConstants.ACTUAL_VERIFICATION_MESSAGE)) {
-            Assert.assertTrue(true);
-            System.out.println(AdactinTestConstants.ACTUAL_VERIFICATION_MESSAGE);
-        } else {
-            Assert.assertTrue(false);
+        try {
+            emailVerificationPage = registerPage.fillRegistrationForm(input.get("Username"),input.get("Password"),input.get("FullName"),input.get("EmailAddress"));
+            registerPage.waitForElementToBeClickable(emailVerificationPage.getConfirmationMessage());
+            String verificationMsg = emailVerificationPage.getConfirmationMessage().getText();
+            if (verificationMsg.contains(AdactinTestConstants.ACTUAL_VERIFICATION_MESSAGE)) {
+                LOG.info("User registration is successful");
+                Assert.assertTrue(true);
+            } else {
+                LOG.error("User registration failed");
+                Assert.fail("User registration failed due to incorrect verification message.");
+            }
+        } catch (Exception e) {
+            LOG.error("Registration failed due to exception");
+            Assert.fail("Registration failed due to exception: " + e.getMessage());
         }
     }
 

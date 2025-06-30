@@ -2,8 +2,10 @@ package com.mansi.adactin.tests;
 
 import com.mansi.adactin.listeners.BaseTest;
 import com.mansi.adactin.pages.LoginPage;
+import com.mansi.adactin.pages.SearchHotelPage;
 import com.mansi.adactin.utils.AdactinConstants;
-import org.openqa.selenium.By;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -20,18 +22,31 @@ import java.util.List;
  */
 public class LoginTest extends BaseTest {
 
+    private final Logger LOG = LogManager.getLogger(LoginTest.class);
+
     private WebDriver driver;
     private LoginPage loginPage;
+    private SearchHotelPage searchHotelPage;
 
-    private String filePath = System.getProperty("user.dir") + AdactinConstants.LOGIN_JSON;
+    private final String filePath = System.getProperty("user.dir") + AdactinConstants.LOGIN_JSON;
 
     @Test (dataProvider = "getData")
     public void performLogin(HashMap<String ,String > input) throws IOException {
         driver = initializeBrowser();
         loginPage = new LoginPage(driver);
-        loginPage.userLogin(input.get("username"),input.get("password"));
-        String welcomeMsg = driver.findElement(By.cssSelector("table.content td[class$='welcome_menu']:first-child")).getText();
-        Assert.assertEquals(welcomeMsg,"Welcome to Adactin Group of Hotels");
+        try {
+            searchHotelPage = loginPage.userLogin(input.get("username"), input.get("password"));
+            if (searchHotelPage.getLocation().isDisplayed()) {
+                LOG.info("Login successful for username: {}", input.get("username"));
+                Assert.assertTrue(true);
+            } else {
+                LOG.error("Login failed for username: {}", input.get("username"));
+                Assert.fail("Login failed due to incorrect credentials.");
+            }
+        } catch (Exception e) {
+            LOG.error("Login failed");
+            Assert.fail("Login failed due to exception: " + e.getMessage());
+        }
     }
 
     @DataProvider

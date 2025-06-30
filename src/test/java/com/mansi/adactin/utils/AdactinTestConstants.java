@@ -7,7 +7,7 @@ package com.mansi.adactin.utils;
  */
 public class AdactinTestConstants {
 
-    public static final String BROWSER_NAME = "Edge";
+    public static final String BROWSER_NAME = "Chrome";
     public static final String K_BROWSER_NAME = "Browser";
 
     public static final String K_TESTER_NAME = "Tester";
@@ -17,7 +17,7 @@ public class AdactinTestConstants {
     public static final String K_JAVA_VERSION = "Java Version";
 
     public static final String EMAIL = "zeke828@gmail.com";
-    public static final String DUMMY_PASSWORD = "Bostan@1234";
+    public static final String DUMMY_PASSWORD = "Bostan@12345";
 
     public static final String DOCUMENT_TITLE = "Test Results";
 

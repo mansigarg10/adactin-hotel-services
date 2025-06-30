@@ -15,7 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class ChangePasswordPage extends AbstractComponent {
 
-    private WebDriver driver;
+    private final WebDriver driver;
     private SearchHotelPage searchHotelPage;
 
     public ChangePasswordPage(WebDriver driver) {
