@@ -24,14 +24,14 @@ public class AdactinTestConstants {
     public static final String WINDOWS_VERSION = "Windows 11";
     public static final String K_WINDOWS_VERSION = "Windows Version";
 
-    public static final String REPORT_PATH = "/./extentReports/index.html/";
+    public static final String REPORT_PATH = "/./docs/index.html/";
     public static final String SCREENSHOT_PATH = "/./test-output/Screenshots/";
 
     public static final String TEST_REPORT_NAME = "Adactin Hotel Booking Automation Report";
     public static final String HOTEL_WEBSITE_URL = "http://adactinhotelapp.com/HotelAppBuild2/";
 
     public static final String PROPERTY_FILE_PATH = "src//main//java//resources//data.properties";
-    public static final String Extent_REPORTS_PATH = System.getProperty("user.dir") + "//extentReports//index.html";
+    public static final String Extent_REPORTS_PATH = System.getProperty("user.dir") + "//docs//index.html";
 
     public static final String FORGOT_PASSWORD_SUCCESS_MESSAGE = "An email has been sent to your email address containing Username and Password. Please check your email.";
     public static final String ACTUAL_VERIFICATION_MESSAGE = "An email verification code has been sent to your email address. Please check your email (including your spam folder) and verify your email address.";

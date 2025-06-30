@@ -120,7 +120,7 @@ Test data is maintained as JSON files:
 Test execution reports are generated using **Extent Reports** and saved at:
 
 ```
-/extentReports/index.html
+/docs/index.html
 ```
 
 Make sure the screenshot paths in the reports are valid and accessible.

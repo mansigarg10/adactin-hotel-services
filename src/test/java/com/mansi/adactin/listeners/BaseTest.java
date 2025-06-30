@@ -102,7 +102,7 @@ public class BaseTest {
     @AfterSuite
     public void cleanHtmlReport() {
         try {
-            Path path = Paths.get(System.getProperty("user.dir") + "/extentReports/index.html");
+            Path path = Paths.get(System.getProperty("user.dir") + "/docs/index.html");
             List<String> lines = Files.readAllLines(path);
             while (!lines.isEmpty() && lines.get(0).trim().isEmpty()) {
                 lines.remove(0);
