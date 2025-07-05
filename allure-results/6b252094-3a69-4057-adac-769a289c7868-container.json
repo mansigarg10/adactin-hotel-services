@@ -1,0 +1,1 @@
+{"uuid":"6b252094-3a69-4057-adac-769a289c7868","name":"All Test Suite","children":["c7fed199-ad28-4de4-af30-ec65284a53f9"],"befores":[],"afters":[{"name":"cleanHtmlReport","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1751700069497,"stop":1751700069575}],"start":1751699945445,"stop":1751700069576}

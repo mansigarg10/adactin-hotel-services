@@ -15,7 +15,8 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class EmailVerificationPage extends AbstractComponent {
 
-    private WebDriver driver;
+    private final WebDriver driver;
+
     public EmailVerificationPage(WebDriver driver) {
         super(driver);
         this.driver = driver;

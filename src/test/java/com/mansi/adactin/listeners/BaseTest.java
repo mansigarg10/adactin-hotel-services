@@ -3,7 +3,10 @@ package com.mansi.adactin.listeners;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mansi.adactin.utils.AdactinTestConstants;
+import com.mansi.adactin.utils.HtmlFormatter;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +20,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
@@ -32,6 +34,8 @@ import java.util.Properties;
  * @author Mansi Garg
  */
 public class BaseTest {
+
+    private final Logger LOG = LogManager.getLogger(BaseTest.class);
 
     public WebDriver driver;
     public Properties prop =  new Properties();
@@ -82,9 +86,9 @@ public class BaseTest {
     public static String captureScreenshot(WebDriver driver,String testName) throws IOException {
         File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         File destinationPath = new File(System.getProperty("user.dir")
-                + "//test-output//Screenshots//" + testName + ".png");
+                + AdactinTestConstants.SCREENSHOT_CAPTURE_PATH + testName + ".png");
         FileUtils.copyFile(src, destinationPath);
-        return AdactinTestConstants.SCREENSHOT_PATH + testName + ".png";
+        return AdactinTestConstants.SCREENSHOT_CAPTURE_PATH + testName + ".png";
     }
 
     /**
@@ -96,21 +100,19 @@ public class BaseTest {
         driver.quit();
     }
 
-    /* This method is called after all test methods in the suite have been executed.
-     * It cleans the HTML report by removing leading empty lines from the index.html file.
+    /**
+     * This method is called after all test methods have been executed.
+     * It formats the HTML report by removing leading empty lines and sanitizing image paths.
      */
     @AfterSuite
     public void cleanHtmlReport() {
         try {
-            Path path = Paths.get(System.getProperty("user.dir") + "/docs/index.html");
-            List<String> lines = Files.readAllLines(path);
-            while (!lines.isEmpty() && lines.get(0).trim().isEmpty()) {
-                lines.remove(0);
-            }
-            Files.write(path, lines);
-            System.out.println("index.html cleaned. Leading empty lines removed.");
+            Path htmlPath = Paths.get(System.getProperty("user.dir") + "/docs/index.html");
+            HtmlFormatter.removeLeadingEmptyLines(htmlPath);
+            HtmlFormatter.sanitizeImagePaths(htmlPath);
+            LOG.info("HTML report formatting completed.");
         } catch (IOException e) {
-            System.err.println("Failed to clean index.html: " + e.getMessage());
+            LOG.error("Failed to format HTML report: {}", e.getMessage());
         }
     }
 

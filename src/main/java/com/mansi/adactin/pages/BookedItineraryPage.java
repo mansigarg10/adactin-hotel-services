@@ -16,8 +16,9 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class BookedItineraryPage extends AbstractComponent {
 
-    private WebDriver driver;
+    private final WebDriver driver;
     private SearchHotelPage searchHotelPage;
+
     public BookedItineraryPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
@@ -29,6 +30,7 @@ public class BookedItineraryPage extends AbstractComponent {
 
     @FindBy(css = "input.reg_button:first-child")
     private WebElement cancelButton;
+
     public void cancelBooking() {
         LoginPage loginPage = new LoginPage(driver);
         searchHotelPage = loginPage.userLogin(AdactinConstants.USER_NAME, AdactinConstants.PASSWORD);

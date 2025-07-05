@@ -15,7 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class BookingConfirmationPage extends AbstractComponent {
 
-    private WebDriver driver;
+    private final WebDriver driver;
     public BookingConfirmationPage(WebDriver driver) {
         super(driver);
         this.driver = driver;

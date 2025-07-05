@@ -15,7 +15,8 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class LoginPage extends AbstractComponent {
 
-    private  WebDriver driver;
+    private final WebDriver driver;
+
     public LoginPage(WebDriver driver) {
         super(driver);
         this.driver = driver;

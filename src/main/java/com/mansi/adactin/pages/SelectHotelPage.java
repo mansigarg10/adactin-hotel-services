@@ -15,7 +15,8 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class SelectHotelPage extends AbstractComponent {
 
-    private WebDriver driver;
+    private final WebDriver driver;
+
     public SelectHotelPage(WebDriver driver) {
         super(driver);
         this.driver = driver;

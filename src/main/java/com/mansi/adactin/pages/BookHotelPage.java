@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 public class BookHotelPage extends AbstractComponent {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public BookHotelPage(WebDriver driver) {
         super(driver);

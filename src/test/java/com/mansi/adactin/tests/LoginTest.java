@@ -24,18 +24,14 @@ public class LoginTest extends BaseTest {
 
     private final Logger LOG = LogManager.getLogger(LoginTest.class);
 
-    private WebDriver driver;
-    private LoginPage loginPage;
-    private SearchHotelPage searchHotelPage;
-
-    private final String filePath = System.getProperty("user.dir") + AdactinConstants.LOGIN_JSON;
+    private final String filePath = System.getProperty("user.dir") + AdactinConstants.LOGIN_JSON_PATH;
 
     @Test (dataProvider = "getData")
     public void performLogin(HashMap<String ,String > input) throws IOException {
         driver = initializeBrowser();
-        loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         try {
-            searchHotelPage = loginPage.userLogin(input.get("username"), input.get("password"));
+            SearchHotelPage searchHotelPage = loginPage.userLogin(input.get("username"), input.get("password"));
             if (searchHotelPage.getLocation().isDisplayed()) {
                 LOG.info("Login successful for username: {}", input.get("username"));
                 Assert.assertTrue(true);

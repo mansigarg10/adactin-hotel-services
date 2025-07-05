@@ -18,14 +18,15 @@ import java.util.List;
 public class SearchHotelPage extends AbstractComponent {
 
     private final WebDriver driver;
-    private final String requiredHotel = "Hotel Sunshine";
-    private final String requiredRoomType = "Super Deluxe";
-    private final String requiredNumberOfRooms = "6 - Six";
-    private final String locationName = "London";
-    private final String checkInDateValue = "20/11/2025";
-    private final String checkOutDateValue = "10/12/2025";
-    private final String adultPerRoom = "4 - Four";
-    private final String childPerRoom = "1 - One";
+
+    private final String REQUIRED_HOTEL = "Hotel Sunshine";
+    private final String REQUIRED_ROOM_TYPE = "Super Deluxe";
+    private final String REQUIRED_NUMBER_OF_ROOMS = "6 - Six";
+    private final String LOCATION_NAME = "London";
+    private final String CHECK_IN_DATE = "20/11/2025";
+    private final String CHECK_OUT_DATE = "10/12/2025";
+    private final String ADULTS_PER_ROOM = "4 - Four";
+    private final String CHILD_PER_ROOM = "1 - One";
 
     public SearchHotelPage(WebDriver driver) {
         super(driver);
@@ -80,22 +81,22 @@ public class SearchHotelPage extends AbstractComponent {
 
     public SelectHotelPage searchHotel() throws InterruptedException {
         location.click();
-        selectElementByText(location, locationName);
+        selectElementByText(location, LOCATION_NAME);
         hotels.click();
-        getTheRequiredElementSelected(hotelNames, requiredHotel);
+        getTheRequiredElementSelected(hotelNames, REQUIRED_HOTEL);
         roomType.click();
-        getTheRequiredElementSelected(roomTypeOptions, requiredRoomType);
+        getTheRequiredElementSelected(roomTypeOptions, REQUIRED_ROOM_TYPE);
         roomNos.click();
-        getTheRequiredElementSelected(roomNosOptions, requiredNumberOfRooms);
+        getTheRequiredElementSelected(roomNosOptions, REQUIRED_NUMBER_OF_ROOMS);
         waitForElementToBeClickable(checkInDate);
         checkInDate.clear();
-        checkInDate.sendKeys(checkInDateValue);
+        checkInDate.sendKeys(CHECK_IN_DATE);
         checkOutDate.clear();
-        checkOutDate.sendKeys(checkOutDateValue);
+        checkOutDate.sendKeys(CHECK_OUT_DATE);
         adultRoom.click();
-        selectElementByText(adultRoom, adultPerRoom);
+        selectElementByText(adultRoom, ADULTS_PER_ROOM);
         childRoom.click();
-        selectElementByText(childRoom, childPerRoom);
+        selectElementByText(childRoom, CHILD_PER_ROOM);
         searchButton.click();
         return new SelectHotelPage(driver);
     }

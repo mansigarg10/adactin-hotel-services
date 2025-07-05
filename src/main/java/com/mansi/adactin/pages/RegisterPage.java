@@ -15,7 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class RegisterPage extends AbstractComponent {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public RegisterPage(WebDriver driver) {
         super(driver);

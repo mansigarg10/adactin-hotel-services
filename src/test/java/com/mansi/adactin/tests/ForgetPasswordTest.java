@@ -29,13 +29,13 @@ public class ForgetPasswordTest extends BaseTest {
         try {
             if (resetSuccessMsg.contains(AdactinTestConstants.FORGOT_PASSWORD_SUCCESS_MESSAGE)) {
                 Assert.assertTrue(true);
-                LOG.info("Forgot password successful for email: {}", AdactinTestConstants.EMAIL);
+                LOG.info("Password reset is success: {}", AdactinTestConstants.EMAIL);
             } else {
                 Assert.fail();
             }
         } catch (Exception e) {
-            LOG.error("Forgot password failed due to exception");
-            Assert.fail("Forgot password failed due to exception: " + e.getMessage());
+            LOG.error("Exception occurred in forgotYourPassword: {}", e.getMessage());
+            Assert.fail("Exception occurred in forgotYourPassword: " + e.getMessage());
         }
     }
 

@@ -39,6 +39,12 @@ public class AbstractComponent {
         select.selectByVisibleText(text);
     }
 
+    /**
+     * This method clicks on the required element from a list of elements based on the text.
+     *
+     * @param elements      List of WebElements to search through.
+     * @param requiredText  The text of the element to be clicked.
+     */
     public void getTheRequiredElementSelected(List<WebElement> elements,String requiredText) {
         for (WebElement element :elements) {
             String elementText = element.getText();

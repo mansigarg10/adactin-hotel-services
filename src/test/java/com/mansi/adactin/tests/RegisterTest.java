@@ -24,28 +24,25 @@ public class RegisterTest extends BaseTest {
 
     private static final Logger LOG = LogManager.getLogger(RegisterTest.class);
 
-    private RegisterPage registerPage;
-    private EmailVerificationPage emailVerificationPage;
-
-    private final String filePath = System.getProperty("user.dir") + AdactinConstants.REGISTER_JSON;
+    private final String filePath = System.getProperty("user.dir") + AdactinConstants.REGISTER_JSON_PATH;
 
     @Test(dataProvider = "getData", priority = 1)
     public void registerToApplication(HashMap<String, String > input) throws IOException {
         driver = initializeBrowser();
-        registerPage = new RegisterPage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
         try {
-            emailVerificationPage = registerPage.fillRegistrationForm(input.get("Username"),input.get("Password"),input.get("FullName"),input.get("EmailAddress"));
+            EmailVerificationPage emailVerificationPage = registerPage.fillRegistrationForm(input.get("Username"), input.get("Password"), input.get("FullName"), input.get("EmailAddress"));
             registerPage.waitForElementToBeClickable(emailVerificationPage.getConfirmationMessage());
             String verificationMsg = emailVerificationPage.getConfirmationMessage().getText();
             if (verificationMsg.contains(AdactinTestConstants.ACTUAL_VERIFICATION_MESSAGE)) {
                 LOG.info("User registration is successful");
                 Assert.assertTrue(true);
             } else {
-                LOG.error("User registration failed");
+                LOG.error("User registration failed: {}", verificationMsg);
                 Assert.fail("User registration failed due to incorrect verification message.");
             }
         } catch (Exception e) {
-            LOG.error("Registration failed due to exception");
+            LOG.error("Registration failed due to exception: {}", e.getMessage());
             Assert.fail("Registration failed due to exception: " + e.getMessage());
         }
     }

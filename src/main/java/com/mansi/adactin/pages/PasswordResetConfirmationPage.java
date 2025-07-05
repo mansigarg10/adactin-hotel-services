@@ -15,7 +15,8 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class PasswordResetConfirmationPage extends AbstractComponent {
 
-    private WebDriver driver;
+    private final WebDriver driver;
+
     public PasswordResetConfirmationPage(WebDriver driver) {
         super(driver);
         this.driver = driver;

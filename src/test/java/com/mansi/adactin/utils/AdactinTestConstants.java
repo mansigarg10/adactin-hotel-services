@@ -24,8 +24,8 @@ public class AdactinTestConstants {
     public static final String WINDOWS_VERSION = "Windows 11";
     public static final String K_WINDOWS_VERSION = "Windows Version";
 
-    public static final String REPORT_PATH = "/./docs/index.html/";
-    public static final String SCREENSHOT_PATH = "/./test-output/Screenshots/";
+    public static final String SCREENSHOT_REPORT_PATH = "./screenshots/";
+    public static final String SCREENSHOT_CAPTURE_PATH = "/./docs/screenshots/";
 
     public static final String TEST_REPORT_NAME = "Adactin Hotel Booking Automation Report";
     public static final String HOTEL_WEBSITE_URL = "http://adactinhotelapp.com/HotelAppBuild2/";
