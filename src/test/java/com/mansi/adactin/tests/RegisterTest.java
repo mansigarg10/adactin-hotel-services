@@ -5,12 +5,22 @@ import com.mansi.adactin.pages.EmailVerificationPage;
 import com.mansi.adactin.pages.RegisterPage;
 import com.mansi.adactin.utils.AdactinConstants;
 import com.mansi.adactin.utils.AdactinTestConstants;
+import com.mansi.adactin.utils.CaptchaReader;
+import net.sourceforge.tess4j.ITesseract;
+import net.sourceforge.tess4j.Tesseract;
+import org.apache.commons.compress.archivers.StreamingNotSupportedException;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bouncycastle.pqc.crypto.ntru.NTRUKEMExtractor;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +41,14 @@ public class RegisterTest extends BaseTest {
         driver = initializeBrowser();
         RegisterPage registerPage = new RegisterPage(driver);
         try {
-            EmailVerificationPage emailVerificationPage = registerPage.fillRegistrationForm(input.get("Username"), input.get("Password"), input.get("FullName"), input.get("EmailAddress"));
+            EmailVerificationPage emailVerificationPage = registerPage.fillRegistrationForm(usernameStamp(), input.get("Password"), input.get("FullName"), input.get("EmailAddress"));
+            Thread.sleep(3000);
+            String text = CaptchaReader.readCaptchaImage(driver,registerPage.getImageElement(), AdactinTestConstants.CAPTCHA_STORED_PATH);
+            System.out.println("Captcha detected: " + text);
+            Thread.sleep(3000);
+            driver.findElement(By.id("captcha-form")).sendKeys(text);
+            registerPage.getTermsAndConditionsCheckbox().click();
+            registerPage.getRegisterButton().click();
             registerPage.waitForElementToBeClickable(emailVerificationPage.getConfirmationMessage());
             String verificationMsg = emailVerificationPage.getConfirmationMessage().getText();
             if (verificationMsg.contains(AdactinTestConstants.ACTUAL_VERIFICATION_MESSAGE)) {
@@ -52,5 +69,13 @@ public class RegisterTest extends BaseTest {
         List<HashMap<String, String>> data =  getJsonData(filePath);
         return new Object[][] {{data.getFirst()}};
     }
+
+
+    public static String usernameStamp(){
+        String dynamicUsername = "user_" + System.currentTimeMillis()%10000;
+        return dynamicUsername;
+    }
+
+
 
 }

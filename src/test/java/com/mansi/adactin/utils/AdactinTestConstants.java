@@ -36,4 +36,6 @@ public class AdactinTestConstants {
     public static final String FORGOT_PASSWORD_SUCCESS_MESSAGE = "An email has been sent to your email address containing Username and Password. Please check your email.";
     public static final String ACTUAL_VERIFICATION_MESSAGE = "An email verification code has been sent to your email address. Please check your email (including your spam folder) and verify your email address.";
 
+    public static final String CAPTCHA_STORED_PATH = System.getProperty("user.dir") + "//docs//screenshots//captchaImage.png";
+
 }

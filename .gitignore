@@ -61,3 +61,4 @@ logs/
 
 ### Mac OS ###
 .DS_Store
+/allure-results

@@ -1,1 +1,0 @@
-{"uuid":"e3b95063-a190-4203-91ac-0135867f7997","name":"Default Suite","children":["e61a320c-f39a-469b-85b6-763bc0963c89"],"befores":[],"afters":[{"name":"cleanHtmlReport","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1751210453073,"stop":1751210453081}],"start":1751210428218,"stop":1751210453082}
