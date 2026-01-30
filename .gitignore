@@ -41,8 +41,7 @@ replay_pid*
 .springBeans
 .sts4-cache
 bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+
 
 ### NetBeans ###
 /nbproject/private/
@@ -62,3 +61,9 @@ logs/
 ### Mac OS ###
 .DS_Store
 /allure-results
+
+# Maven / TestNG reports
+test-output/
+surefire-reports/
+failsafe-reports/
+
