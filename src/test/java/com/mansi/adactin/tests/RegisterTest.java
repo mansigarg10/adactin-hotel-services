@@ -17,6 +17,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -34,16 +35,19 @@ public class RegisterTest extends BaseTest {
 
     private static final Logger LOG = LogManager.getLogger(RegisterTest.class);
 
-    private final String filePath = System.getProperty("user.dir") + AdactinConstants.REGISTER_JSON_PATH;
 
-    @Test(dataProvider = "getData", priority = 1)
-    public void registerToApplication(HashMap<String, String > input) throws IOException {
-        driver = initializeBrowser();
+    @BeforeMethod
+    public void openApplication() throws IOException {
+        driver = initializeBrowser(AdactinTestConstants.HOTEL_WEBSITE_URL);
+    }
+
+    @Test(priority = 1)
+    public void registerToApplication() throws IOException {
         RegisterPage registerPage = new RegisterPage(driver);
         try {
-            EmailVerificationPage emailVerificationPage = registerPage.fillRegistrationForm(usernameStamp(), input.get("Password"), input.get("FullName"), input.get("EmailAddress"));
+            EmailVerificationPage emailVerificationPage = registerPage.fillRegistrationForm(usernameStamp(), AdactinTestConstants.DUMMY_PASSWORD, usernameStamp(), emailStamp());
+            String text = CaptchaReader.readCaptchaImage(registerPage.getImageElement(), AdactinTestConstants.CAPTCHA_STORED_PATH);
             Thread.sleep(3000);
-            String text = CaptchaReader.readCaptchaImage(driver,registerPage.getImageElement(), AdactinTestConstants.CAPTCHA_STORED_PATH);
             System.out.println("Captcha detected: " + text);
             Thread.sleep(3000);
             driver.findElement(By.id("captcha-form")).sendKeys(text);
@@ -64,16 +68,16 @@ public class RegisterTest extends BaseTest {
         }
     }
 
-    @DataProvider
-    public Object[][] getData() throws IOException {
-        List<HashMap<String, String>> data =  getJsonData(filePath);
-        return new Object[][] {{data.getFirst()}};
+
+
+    private static String usernameStamp(){
+        String dynamicUsername = "user" + System.currentTimeMillis()%10000;
+        return dynamicUsername.replaceAll("[^a-zA-Z0-9]", "");
     }
 
-
-    public static String usernameStamp(){
-        String dynamicUsername = "user_" + System.currentTimeMillis()%10000;
-        return dynamicUsername;
+    private static String emailStamp(){
+        String dynamicEmail = "email" + System.currentTimeMillis()%10000 + "@test.com";
+        return dynamicEmail;
     }
 
 

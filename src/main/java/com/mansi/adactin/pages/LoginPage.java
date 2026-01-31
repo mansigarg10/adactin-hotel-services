@@ -38,6 +38,9 @@ public class LoginPage extends AbstractComponent {
     @FindBy(css = "div.login_forgot a")
     private WebElement forgotPasswordLink;
 
+    @FindBy(xpath = "//div[@class='auth_error']/b")
+    WebElement loginErrorMessage;
+
     public SearchHotelPage userLogin(String username, String pass) {
         userName.sendKeys(username);
         password.sendKeys(pass);

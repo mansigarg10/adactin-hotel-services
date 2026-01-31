@@ -15,6 +15,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeTest;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,7 +48,8 @@ public class BaseTest {
      * @return WebDriver instance for the initialized browser.
      * @throws IOException If an error occurs while reading the properties file.
      */
-    public  WebDriver initializeBrowser() throws IOException {
+
+    public  WebDriver initializeBrowser(String url) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(propetyFile);
         prop.load(fileInputStream);
         if (prop.getProperty("browser").equalsIgnoreCase("Chrome")) {
@@ -57,7 +59,7 @@ public class BaseTest {
         } else {
             driver = new EdgeDriver();
         }
-        driver.get(AdactinTestConstants.HOTEL_WEBSITE_URL);
+        driver.get(url);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         return driver;

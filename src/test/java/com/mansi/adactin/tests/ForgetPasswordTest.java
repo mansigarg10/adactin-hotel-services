@@ -7,6 +7,7 @@ import com.mansi.adactin.utils.AdactinTestConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -20,9 +21,14 @@ public class ForgetPasswordTest extends BaseTest {
 
     private static final Logger LOG = LogManager.getLogger(ForgetPasswordTest.class);
 
+    @BeforeMethod
+    public void openApplication() throws IOException {
+        driver = initializeBrowser(AdactinTestConstants.HOTEL_WEBSITE_URL);
+    }
+
     @Test(priority = 4)
     public void forgotYourPassword() throws IOException {
-        driver = initializeBrowser();
+
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driver);
         PasswordResetConfirmationPage passwordResetConfirmationPage = forgotPasswordPage.forgotPassword(AdactinTestConstants.EMAIL);
         String resetSuccessMsg = passwordResetConfirmationPage.getResetPasswordSuccessMessage().getText();

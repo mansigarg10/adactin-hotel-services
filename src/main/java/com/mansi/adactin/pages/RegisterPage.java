@@ -56,8 +56,7 @@ public class RegisterPage extends AbstractComponent {
     @FindBy(xpath = "//img[@id='captcha']")
     private WebElement imageElement;
 
-    public EmailVerificationPage fillRegistrationForm(String username, String pass, String name,
-                                                      String emailId) throws InterruptedException {
+    public EmailVerificationPage fillRegistrationForm(String username, String pass, String name, String emailId) throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.getRegisterLink().click();
         userName.sendKeys(username);
@@ -65,6 +64,7 @@ public class RegisterPage extends AbstractComponent {
         confirmPassword.sendKeys(pass);
         fullName.sendKeys(name);
         emailAddress.sendKeys(emailId);
+        Thread.sleep(8000);
         return new EmailVerificationPage(driver);
     }
 

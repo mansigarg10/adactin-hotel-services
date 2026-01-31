@@ -18,9 +18,9 @@ import java.time.Duration;
 public class CaptchaReader {
 
 
-    public static String readCaptchaImage(WebDriver driver, WebElement imageElement, String path) throws IOException, TesseractException, InterruptedException {
+    public static String readCaptchaImage(WebElement imageElement, String path) throws IOException, TesseractException {
 
-       waitForCaptcha(driver, imageElement);
+
         File src = imageElement.getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(src, new File(path));
 
@@ -38,16 +38,7 @@ public class CaptchaReader {
         return text;
     }
 
-    private static void waitForCaptcha(WebDriver driver, WebElement imageElement){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOf(imageElement));
 
-        wait.until(d ->
-                ((JavascriptExecutor) d)
-                        .executeScript("return arguments[0].complete", imageElement).equals(true)
-        );
-
-    }
 
 
 

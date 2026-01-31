@@ -4,7 +4,6 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.mansi.adactin.utils.ExtentReporter;
-import io.qameta.allure.Attachment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -39,7 +38,7 @@ public class Listeners extends BaseTest implements ITestListener {
         eTest.get().log(Status.PASS, result.getName() + " is passed");
     }
 
-    @Attachment
+
     public void onTestFailure(ITestResult result) {
         String filePath;
         eTest.get().fail(result.getThrowable());

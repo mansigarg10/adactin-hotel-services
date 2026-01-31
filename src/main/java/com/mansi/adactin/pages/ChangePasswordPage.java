@@ -40,10 +40,10 @@ public class ChangePasswordPage extends AbstractComponent {
         LoginPage loginPage = new LoginPage(driver);
         searchHotelPage = loginPage.userLogin(username, oldPassword);
         searchHotelPage.getChangePassword().click();
-        currentPassword.sendKeys(oldPassword);
+        getCurrentPassword().sendKeys(oldPassword);
         getNewPassword().sendKeys(newPassword);
-        confirmPassword.sendKeys(newPassword);
-        submitButton.click();
+        getConfirmPassword().sendKeys(newPassword);
+        getSubmitButton().click();
     }
 
 }

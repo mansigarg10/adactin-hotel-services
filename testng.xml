@@ -23,7 +23,8 @@
             </class>
             <class name="com.mansi.adactin.tests.LoginTest">
                 <methods>
-                    <include name="performLogin"/>
+                    <include name="performLoginWithValidCredentials"/>
+                    <include name="loginWithInvalidCredentials"/>
                 </methods>
             </class>
             <class name="com.mansi.adactin.tests.RegisterTest">

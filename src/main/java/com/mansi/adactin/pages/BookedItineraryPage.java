@@ -31,9 +31,9 @@ public class BookedItineraryPage extends AbstractComponent {
     @FindBy(css = "input.reg_button:first-child")
     private WebElement cancelButton;
 
-    public void cancelBooking() {
+    public void cancelBooking(String username, String password) {
         LoginPage loginPage = new LoginPage(driver);
-        searchHotelPage = loginPage.userLogin(AdactinConstants.USER_NAME, AdactinConstants.PASSWORD);
+        searchHotelPage = loginPage.userLogin(username, password);
         searchHotelPage.getBookedItinerary().click();
         selectAllCheckbox.click();
         cancelButton.click();

@@ -3,9 +3,11 @@ package com.mansi.adactin.tests;
 import com.mansi.adactin.listeners.BaseTest;
 import com.mansi.adactin.pages.*;
 import com.mansi.adactin.utils.AdactinConstants;
+import com.mansi.adactin.utils.AdactinTestConstants;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -17,29 +19,28 @@ import java.util.List;
  */
 public class RoomBookingTest extends BaseTest {
 
-    private final String LOGIN_FILE = System.getProperty("user.dir") + AdactinConstants.LOGIN_JSON_PATH;
     private final String BOOKING_DETAILS_FILE = System.getProperty("user.dir") + AdactinConstants.BOOKING_JSON_PATH;
 
     @Test(dataProvider = "getData", priority = 2)
-    public  void searchHotel(HashMap<String,String> input, HashMap<String,String> input1) throws InterruptedException, IOException {
-        driver = initializeBrowser();
+    public  void searchHotel(HashMap<String,String> input) throws InterruptedException, IOException {
+        driver = initializeBrowser(AdactinTestConstants.HOTEL_WEBSITE_URL);
         LoginPage loginPage = new LoginPage(driver);
-        SearchHotelPage searchHotelPage = loginPage.userLogin(input.get("username"), input.get("password"));
+        FileInputStream fileInputStream = new FileInputStream(propetyFile);
+        prop.load(fileInputStream);
+        SearchHotelPage searchHotelPage = loginPage.userLogin(prop.getProperty("username"), prop.getProperty("password")); ;
         SelectHotelPage selectHotelPage = searchHotelPage.searchHotel();
         BookHotelPage bookHotelPage = selectHotelPage.selectTheHotel();
-        BookingConfirmationPage bookingConfirmationPage = bookHotelPage.provideBookingDetails(input1.get("k_name"),
-                input1.get("k_surname"), input1.get("k_currentAddress"), input1.get("k_cardNumber"),
-                input1.get("k_cardBrand"), input1.get("k_cardExpiryMonth"),
-                input1.get("k_cardExpiryYear"), input1.get("k_cardCVV"));
+        BookingConfirmationPage bookingConfirmationPage = bookHotelPage.provideBookingDetails(input.get("k_name"),
+                input.get("k_surname"), input.get("k_currentAddress"), input.get("k_cardNumber"),
+                input.get("k_cardBrand"), input.get("k_cardExpiryMonth"),
+                input.get("k_cardExpiryYear"), input.get("k_cardCVV"));
         bookingConfirmationPage.getMyItineraryButton().click();
     }
 
     @DataProvider
     public Object[][] getData() throws IOException {
-        List<HashMap<String, String>> data = getJsonData(LOGIN_FILE);
         List<HashMap<String, String>> data1 = getJsonData(BOOKING_DETAILS_FILE);
-        return new Object[][] {
-                { data.get(0), data1.get(0) }
+        return new Object[][] {{data1.get(0) }
         };
     }
 

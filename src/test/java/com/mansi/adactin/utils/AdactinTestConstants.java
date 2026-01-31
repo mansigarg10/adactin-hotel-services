@@ -38,4 +38,8 @@ public class AdactinTestConstants {
 
     public static final String CAPTCHA_STORED_PATH = System.getProperty("user.dir") + "//docs//screenshots//captchaImage.png";
 
+    public static final String LOGIN_ERROR_MESSAGE = "Invalid Login details or Your Password might have expired. Click here to reset your password";
+
+    public static final String  CHNAGE_PASSWORD_URL = "https://adactinhotelapp.com/HotelAppBuild2/ChangePassword.php";
+
 }
